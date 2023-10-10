@@ -6,7 +6,7 @@ const contabilidad = () => {
   return (
     <View className="flex-1 flex justify-center items-center">
       <ContainerFondo>
-        <Text className="font-bold text-4xl">contabilidad</Text>
+        <Text className="font-bold text-4xl">Contabilidad</Text>
       </ContainerFondo>
     </View>
   );

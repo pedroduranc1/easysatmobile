@@ -17,6 +17,18 @@
         "projectId": "b885b07f-bca5-4d09-bb56-9d8f7a7c7d49"
       }
     },
-    "owner": "pedropdc"
+    "owner": "pedropdc",
+    "android": {
+      "package": "com.pedropdc.easysat"
+    },
+    "ios": {
+      "bundleIdentifier": "com.pedropdc.easysat"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b885b07f-bca5-4d09-bb56-9d8f7a7c7d49"
+    }
   }
 }

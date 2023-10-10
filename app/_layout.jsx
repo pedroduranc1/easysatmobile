@@ -1,11 +1,13 @@
-import { Stack } from "expo-router"
+import { Stack } from "expo-router";
 
 const StackLayout = () => {
-    return(
-        <Stack>
-            <Stack.Screen name="(tabs)" options={{headerShown:false}} />
-        </Stack>
-    )
-}
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-export default StackLayout
+      <Stack.Screen name="main" options={{ headerShown: false }} />
+    </Stack>
+  );
+};
+
+export default StackLayout;
