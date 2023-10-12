@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Token } from "../api/token/token";
 import { User } from "../api/user/fb.user";
+import * as SecureStore from 'expo-secure-store';
 
 const tokenCtrl = new Token();
 const UserCtrl = new User();
@@ -13,6 +13,17 @@ export function AuthProvider(props) {
   const [User, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const getUserInfoFromSecureStore = async () => {
+    try {
+      const storedUser = await SecureStore.getItemAsync("ui");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (error) {
+      // Handle error
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -33,13 +44,7 @@ export function AuthProvider(props) {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      const storedUser = JSON.parse(await AsyncStorage.getItem("ui"));
-      if (storedUser) {
-        setUser(storedUser);
-        setLoading(false);
-      }
-    })();
+    getUserInfoFromSecureStore();
   }, []);
 
   const login = async (token, uid) => {
@@ -47,9 +52,9 @@ export function AuthProvider(props) {
       setLoading(true);
       await tokenCtrl.setToken(token);
       const response = await UserCtrl.getMe(uid);
-      await AsyncStorage.setItem("ui", JSON.stringify(response));
-      const data = JSON.parse(await AsyncStorage.getItem("ui"));
-      setUser(data);
+      await SecureStore.setItemAsync("ui", JSON.stringify(response));
+      const storedUser = await SecureStore.getItemAsync('ui');
+      setUser(JSON.parse(storedUser));
       setLoading(false);
     } catch (error) {
       // console.error(error);
@@ -59,7 +64,7 @@ export function AuthProvider(props) {
 
   const logout = async () => {
     await tokenCtrl.removeToken();
-    await AsyncStorage.removeItem("ui");
+    await SecureStore.deleteItemAsync("ui");
     setToken(null);
     setUser(null);
   };

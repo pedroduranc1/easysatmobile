@@ -4,8 +4,12 @@ import ContainerFondo from "../../src/components/ui/ContainerFondo";
 import TobBarOptions from "../../src/components/ui/TobBarOptions";
 import { Image } from "expo-image";
 import buho from "../../assets/logoNuevo.png";
+import { useAuth } from "../../src/hooks/useAuth";
 
 const home = () => {
+
+  const {User} = useAuth()
+
   return (
     <ContainerFondo>
       <View className="flex flex-1 w-full h-full ">
@@ -20,7 +24,7 @@ const home = () => {
             />
             <View className="w-[60%] flex justify-center items-center">
               <Text>Bienvenido a EasySAT</Text>
-              <Text>Pedroduranc1</Text>
+              <Text>{User?.Username}</Text>
             </View>
           </View>
         </View>
