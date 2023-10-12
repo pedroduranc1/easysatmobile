@@ -16,7 +16,7 @@ const TobBarOptions = () => {
       <TouchableOpacity>
         <Icon name={"MessageCircle"} />
       </TouchableOpacity>
-      <Text className="font-bold text-base">{User && User?.Username}</Text>
+      <Text className="font-bold text-black text-base">{User && User?.Username}</Text>
       <TouchableOpacity onPress={()=> handleLogout()}>
         <Icon name={"LogOut"} />
       </TouchableOpacity>

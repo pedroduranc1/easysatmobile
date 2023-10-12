@@ -6,7 +6,7 @@
     },
     "plugins": ["expo-router"],
     "name": "EASYSAT",
-    "icon":"./assets/logoNuevo.png",
+    
     "slug": "easy-sat",
     "extra": {
       "router": {
