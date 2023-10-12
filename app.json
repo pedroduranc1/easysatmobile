@@ -6,11 +6,7 @@
     },
     "plugins": ["expo-router"],
     "name": "EASYSAT",
-    "icon": {
-      "image": "./assets/logoNuevo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#25292e"
-    },
+    "icon":"./assets/logoNuevo.png",
     "slug": "easy-sat",
     "extra": {
       "router": {
