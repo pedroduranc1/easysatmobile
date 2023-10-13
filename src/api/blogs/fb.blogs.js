@@ -47,10 +47,20 @@ export class BlogsCtrl {
   }
 
   async getBlogMDX(blogName) {
-    if (blogName != null) {
+    // if (blogName != null || blogName != undefined) {
+    //   const resp = await axios.get(blogName);
+    //   const mdx = resp.data;
+    //   return mdx;
+    // }
+    try {
+      console.log(blogName)
       const resp = await axios.get(blogName);
       const mdx = resp.data;
       return mdx;
+    } catch (error) {
+      console.log(blogName)
+      console.log(error)
+      throw error
     }
   }
 

@@ -4,11 +4,14 @@ import ContainerFondo from "../../src/components/ui/ContainerFondo";
 import TobBarOptions from "../../src/components/ui/TobBarOptions";
 import { Image } from "expo-image";
 import buho from "../../assets/logoNuevo.png";
-import { useAuth } from "../../src/hooks/useAuth";
+import { useQuery, useQueryClient } from "react-query";
 
 const home = () => {
 
-  const {User} = useAuth()
+  const queryCl = useQueryClient();
+  const token = queryCl.getQueryData("token");
+
+  const { data: User } = useQuery(token, async () => UserCtrl.getMe(token));
 
   return (
     <ContainerFondo>

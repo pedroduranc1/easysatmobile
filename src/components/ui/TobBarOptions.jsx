@@ -2,13 +2,20 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect } from "react";
 import Icon from "./Icon";
 import { router } from "expo-router";
-import { useAuth } from "../../hooks/useAuth";
+import { useQuery, useQueryClient } from "react-query";
+import { User } from "../../api/user/fb.user";
 
+const UserCtrl = new User()
 const TobBarOptions = () => {
-  const {User} = useAuth()
+
+  const queryCl = useQueryClient()
+  const token = queryCl.getQueryData('token')
+
+  const {data:User} = useQuery(token,async ()=>UserCtrl.getMe(token))
   
-  const handleLogout = () => {
-    router.replace("/login")
+  const handleLogout = async () => {
+    // await logout();
+    router.replace("/")
   }
 
   return (
@@ -16,7 +23,7 @@ const TobBarOptions = () => {
       <TouchableOpacity>
         <Icon name={"MessageCircle"} />
       </TouchableOpacity>
-      <Text className="font-bold text-black text-base">{User && User?.Username}</Text>
+      <Text className="font-bold text-black text-base">{User?.Username}</Text>
       <TouchableOpacity onPress={()=> handleLogout()}>
         <Icon name={"LogOut"} />
       </TouchableOpacity>

@@ -11,37 +11,40 @@ import {
 } from "../../src/formikYup/login/login.form";
 import Loader from "../../src/components/ui/Loader";
 import { Auth } from "../../src/api/auth/fb.auth";
-import { useAuth } from "../../src/hooks/useAuth";
+import { useMutation, useQueryClient } from "react-query";
 
 const AuthCtrl = new Auth();
 
 const index = () => {
-  const { login, User } = useAuth();
+  const queryClient = useQueryClient();
   const [ErrorLogin, setErrorLogin] = useState(null);
 
-  const handleFormSubmit = async (value) => {
-    try {
-      const response = await AuthCtrl.login(value.email, value.password);
-      const { accessToken, uid } = response;
-      login(accessToken, uid);
-      setErrorLogin(null)
-      router.replace("/main")
-    } catch (error) {
-      switch (error.message) {
-        case "Firebase: Error (auth/wrong-password).":
-          setErrorLogin("Contraseña invalida.")
-          break;
+  const mutation = useMutation(({ email, password }) =>
+    AuthCtrl.login(email.toLowerCase(), password.toLowerCase())
+  );
 
-        case "Firebase: Error (auth/user-not-found).":
-          setErrorLogin("No estas registrado.")
-          break;
-        default:
-          setErrorLogin("Contactate con soporte.")
-          break;
-      }
-    }
-
-    //router.replace("/main")
+  const handleFormSubmit = async (values) => {
+    mutation.mutate(values, {
+      onSuccess: async (response) => {
+        const { uid } = response;
+        queryClient.setQueryData("token",uid)
+        queryClient.setQueryData("User",response)
+        return router.replace("/main");
+      },
+      onError: (error) => {
+        switch (error.message) {
+          case "Firebase: Error (auth/wrong-password).":
+            setErrorLogin("Contraseña invalida.");
+            break;
+          case "Firebase: Error (auth/user-not-found).":
+            setErrorLogin("No estas registrado.");
+            break;
+          default:
+            setErrorLogin("Contactate con soporte.");
+            break;
+        }
+      },
+    });
   };
 
   return (
@@ -96,15 +99,13 @@ const index = () => {
               value={values.password}
             />
 
-            {
-              ErrorLogin && (<Text className="text-red-500">{ErrorLogin}</Text>)
-            }
+            {ErrorLogin && <Text className="text-red-500">{ErrorLogin}</Text>}
 
             <TouchableOpacity
               onPress={handleSubmit}
               className="bg-white w-[90%] rounded-md py-3 flex justify-center items-center mt-20"
             >
-              {isSubmitting ? <Loader /> : <Text>Iniciar Sesion</Text>}
+              {mutation.isLoading ? <Loader /> : <Text>Iniciar Sesion</Text>}
             </TouchableOpacity>
           </>
         )}

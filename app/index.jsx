@@ -1,26 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ContainerFondo from "../src/components/ui/ContainerFondo";
 import logo from "../assets/logo.webp";
 import { Image } from "expo-image";
 import { Text, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
-import { useAuth } from "../src/hooks/useAuth";
+import { useMutation, useQueryClient } from "react-query";
+import { User } from "../src/api/user/fb.user";
 
+const UserCtrl = new User()
 const index = () => {
-  const { User } = useAuth();
+  const queryCl = useQueryClient();
+  const token = queryCl.getQueryData("token");
 
-  const isMounted = useRef(false);
+  const mutation = useMutation(({ token }) =>
+    UserCtrl.getMe(token)
+  );
 
   useEffect(() => {
-    isMounted.current = true;
-    return () => (isMounted.current = false);
-  }, []);
+    if(token){
+      mutation.mutate(token)
+    }
+  }, [])
 
-  // Luego, antes de navegar:
-  if (isMounted.current) {
-    // Tu lógica de navegación aquí
-    if (User) return router.replace("/main");
-  }
 
   return (
     <ContainerFondo>
@@ -39,9 +40,20 @@ const index = () => {
         <Text>Iniciar Sesion</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity className="w-[90%] bg-transparent mt-5 flex justify-center items-center  rounded-md py-3">
-        <Text>Olvidaste Tu Contraseña</Text>
-      </TouchableOpacity>
+      {mutation.data ? (
+        <TouchableOpacity
+          onPress={() => {
+            router.replace("/main");
+          }}
+          className="w-[90%] my-[10%] flex justify-center items-center bg-white rounded-md py-3"
+        >
+          <Text>Continuar como: {mutation.data?.Username}</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity className="w-[90%] bg-transparent mt-5 flex justify-center items-center  rounded-md py-3">
+          <Text>Olvidaste Tu Contraseña</Text>
+        </TouchableOpacity>
+      )}
 
       <View className="my-5 w-full px-[10%] h-fit flex gap-3 flex-row justify-center items-center">
         <View className="bg-black w-1/2 h-1 rounded-full" />

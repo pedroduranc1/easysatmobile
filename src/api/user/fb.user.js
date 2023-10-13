@@ -46,7 +46,7 @@ export class User {
       // Devolver los datos del usuario
       return userData;
     } catch (error) {
-      throw `Error de firebase : ${error}`;
+      // throw `Error de firebase : ${error}`;
     }
   }
 }

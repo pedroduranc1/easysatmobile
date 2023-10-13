@@ -3,10 +3,13 @@ import React from "react";
 import ContainerFondo from "../../src/components/ui/ContainerFondo";
 import TobBarOptions from "../../src/components/ui/TobBarOptions";
 import { UserCircle } from "lucide-react-native";
-import { useAuth } from "../../src/hooks/useAuth";
+import { useQuery, useQueryClient } from "react-query";
 
 const perfil = () => {
-  const { User } = useAuth();
+  const queryCl = useQueryClient();
+  const token = queryCl.getQueryData("token");
+
+  const { data: User } = useQuery(token, async () => UserCtrl.getMe(token));
 
   return (
     <ContainerFondo>

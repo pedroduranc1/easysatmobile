@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  ScrollView,
   Image,
   TouchableOpacity,
   FlatList,
@@ -10,11 +9,14 @@ import React from "react";
 import ContainerFondo from "../../src/components/ui/ContainerFondo";
 import TobBarOptions from "../../src/components/ui/TobBarOptions";
 import { BlogsCtrl } from "../../src/api/blogs/fb.blogs";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import AutorCard from "../../src/components/ui/AutorCard";
+import { router } from "expo-router";
 
 const BlogsCtl = new BlogsCtrl();
 const blogs = () => {
+  const queryCl = useQueryClient()
+
   const { data: blogs, isLoading } = useQuery("blogs", () =>
     BlogsCtl.getBlogs()
   );
@@ -39,6 +41,10 @@ const blogs = () => {
                 style={{width:'90%',height:'100%'}}
                 renderItem={({ item }) => (
                   <TouchableOpacity
+                    onPress={()=>{
+                      queryCl.setQueryData(item?.Slug,JSON.stringify(item))
+                      router.push(`/blog/${item?.Slug}`)
+                    }}
                     className="flex items-center bg-white py-2 flex-row mx-auto h-auto rounded-md w-full mt-10 shadow-lg"
                   >
                     <Image
