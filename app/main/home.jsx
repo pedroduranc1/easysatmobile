@@ -3,7 +3,7 @@ import React from "react";
 import ContainerFondo from "../../src/components/ui/ContainerFondo";
 import TobBarOptions from "../../src/components/ui/TobBarOptions";
 import { Image } from "expo-image";
-import buho from "../../assets/logoNuevo.png";
+import buho from "../../assets/logonuevo.webp";
 import { useQuery, useQueryClient } from "react-query";
 
 const home = () => {

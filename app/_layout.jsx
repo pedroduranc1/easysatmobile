@@ -14,6 +14,8 @@ const StackLayout = () => {
           <Stack.Screen name="login" />
           <Stack.Screen name="main" />
           <Stack.Screen name="registro" />
+          <Stack.Screen name="resetPassword" />
+          <Stack.Screen name="mailSent" />
         </Stack>
       </AuthProvider>
     </QueryClientProvider>

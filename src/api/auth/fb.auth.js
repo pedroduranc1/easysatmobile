@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 
 export class Auth {
@@ -21,4 +21,21 @@ export class Auth {
       throw error;
     }
   }
+
+  async resetPassword (email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      // El correo electrónico de restablecimiento de contraseña se ha enviado correctamente
+      return {
+        type:true,
+        msg: "Correo Enviado"
+      }
+    } catch (error) {
+      return{
+        type:false,
+        error: error.message
+      }
+      // Ocurrió un error al enviar el correo electrónico de restablecimiento de contraseña
+    }
+  };
 }
