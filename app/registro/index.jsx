@@ -155,33 +155,15 @@ const index = () => {
             {!mutation.isLoading ? (
               <TouchableOpacity
                 onPress={handleSubmit}
-                className="w-[60%]  mt-[15%]  flex justify-center items-center  rounded-md py-4"
+                className="w-[60%] bg-white  shadow-2xl mt-[15%]  flex justify-center items-center  rounded-md py-4"
               >
-                <LinearGradient
-                  colors={["#0575ae", "#30627b"]}
-                  start={[0, 0]}
-                  end={[1, 0]}
-                  className="w-full rounded-md flex items-center"
-                >
-                  <View style={{ padding: 16 }}>
-                    <Text style={{ color: "white", fontWeight: "bold" }}>
-                      Registrate
-                    </Text>
-                  </View>
-                </LinearGradient>
+                <Text>
+                  Registrate
+                </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity className="w-[60%]  mt-[15%]  flex justify-center items-center  rounded-md py-4">
-                <LinearGradient
-                  colors={["#0575ae", "#30627b"]}
-                  start={[0, 0]}
-                  end={[1, 0]}
-                  className="w-full rounded-md flex items-center"
-                >
-                  <View style={{ padding: 16 }}>
-                    <Loader />
-                  </View>
-                </LinearGradient>
+              <TouchableOpacity className="w-[60%]  shadow-2xl mt-[15%]  flex justify-center items-center  rounded-md py-4">
+                <Loader />
               </TouchableOpacity>
             )}
           </>
