@@ -59,7 +59,7 @@ const index = () => {
 
 
       <TouchableOpacity
-        onPress={() => router.push("/mailSent")}
+        onPress={() => router.push("/registro")}
         className="w-[70%] mt-[10%] flex justify-center items-center bg-white rounded-md py-4"
       >
         <Text>Registrate</Text>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ContainerFondo from "../../src/components/ui/ContainerFondo";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import { router, useRouter } from "expo-router";
+import { router } from "expo-router";
 import { Formik } from "formik";
 import {
   LoginSchema,
@@ -17,30 +17,29 @@ import * as LocalAuthentication from "expo-local-authentication";
 const AuthCtrl = new Auth();
 
 async function biometricAuth() {
-
   // 1. Checkear disponibilidad
   const isAvailable = await LocalAuthentication.hasHardwareAsync();
   if (!isAvailable) return false;
 
-  // 2. Obtener tipos soportados 
-  const {supportedAuthenticationTypes} = await LocalAuthentication.supportedAuthenticationTypesAsync();
+  // 2. Obtener tipos soportados
+  const { supportedAuthenticationTypes } =
+    await LocalAuthentication.supportedAuthenticationTypesAsync();
 
   // 3. Mostrar mensaje de autenticación
-  const msg = 'Inicio de sesión biométrico';
+  const msg = "Inicio de sesión biométrico";
 
-  // 4. Llamar authenticate, manejar promesa  
+  // 4. Llamar authenticate, manejar promesa
   try {
     const { success } = await LocalAuthentication.authenticateAsync({
       promptMessage: msg,
-      authenticationTypes: supportedAuthenticationTypes 
+      authenticationTypes: supportedAuthenticationTypes,
     });
     if (success) return true; // Autenticado!
     return false;
   } catch (error) {
-    console.log('Auth error', error);
+    console.log("Auth error", error);
     return false;
   }
-
 }
 
 const index = () => {
@@ -77,16 +76,13 @@ const index = () => {
   };
 
   const handleLoginBiometric = async () => {
-    const navigate = useRouter()
-
     const authenticated = await biometricAuth();
     if (!authenticated) {
-      console.log('No autenticado');
+      console.log("No autenticado");
       return;
-    } 
-    console.log('paso')
-    navigate.push('/main')
-  }
+    }
+    return router.replace("/main")
+  };
 
   return (
     <ContainerFondo>
