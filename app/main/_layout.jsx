@@ -1,6 +1,8 @@
-import { Tabs } from "expo-router";
+import { Tabs, router } from "expo-router";
 import TabButtons from "../../src/components/ui/TabButtons";
-import { Platform } from "react-native";
+import { Platform, TouchableOpacity } from "react-native";
+import logo from "../../assets/logonuevo.webp";
+import { Image } from "expo-image";
 
 export default () => {
   return (
@@ -34,25 +36,25 @@ export default () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons icon={"Home"} text={"Inicio"} focused={focused} />
+            <Image source={logo} className="w-14 -translate-y-8 h-16" />
           ),
         }}
       />
       <Tabs.Screen
-        name="blogs"
+        name="informes"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons icon={"Newspaper"} text={"Blogs"} focused={focused} />
+            <TabButtons focused={focused} icon={"LineChart"} text={""}  />
           ),
         }}
       />
       <Tabs.Screen
-        name="perfil"
+        name="documentos"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons icon={"UserCircle"} text={"Perfil"} focused={focused} />
+            <TabButtons focused={focused} icon={"FileText"} text={""}  />
           ),
         }}
       />
