@@ -21,7 +21,7 @@
     "expo-local-authentication": "~13.4.1",
     "expo-router": "2.0.0",
     "expo-secure-store": "~12.3.1",
-    "expo-splash-screen": "~0.20.4",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "expo-updates": "~0.18.16",
     "firebase": "^10.4.0",

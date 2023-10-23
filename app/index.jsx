@@ -7,6 +7,9 @@ import { router } from "expo-router";
 import { useMutation, useQueryClient } from "react-query";
 import { User } from "../src/api/user/fb.user";
 import { LinearGradient } from "expo-linear-gradient";
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
 
 const UserCtrl = new User();
 const index = () => {

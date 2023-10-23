@@ -6,7 +6,13 @@
     },
     "plugins": ["expo-router"],
     "name": "EASYSAT",
-    
+    "icon":"./assets/icon.png",
+    "splash":{
+      "image":"./assets/icon.png",
+      "reszeMode":"contain",
+      "backgroundColor":"#00BCD4"
+    },
+    "orientation":"portrait",
     "slug": "easy-sat",
     "extra": {
       "router": {

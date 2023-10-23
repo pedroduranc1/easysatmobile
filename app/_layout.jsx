@@ -1,8 +1,8 @@
 import React from "react";
 import { Stack } from "expo-router";
 import { AuthProvider } from "../src/context/AuthContext";
-import { QueryClient, QueryClientProvider  } from "react-query";
-
+import { QueryClient, QueryClientProvider } from "react-query";
+import * as SplashScreen from "expo-splash-screen";
 // Create a client
 const queryClient = new QueryClient();
 
