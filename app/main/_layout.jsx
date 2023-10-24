@@ -32,6 +32,24 @@ export default () => {
       }}
     >
       <Tabs.Screen
+        name="declaraciones"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabButtons focused={focused} icon={"HelpCircle"}  />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="docs"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabButtons focused={focused} icon={"HelpCircle"}  />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="home"
         options={{
           headerShown: false,
@@ -45,7 +63,7 @@ export default () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons focused={focused} icon={"LineChart"} text={""}  />
+            <TabButtons focused={focused} icon={"LineChart"}   />
           ),
         }}
       />
@@ -54,7 +72,7 @@ export default () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons focused={focused} icon={"FileText"} text={""}  />
+            <TabButtons focused={focused} icon={"FileText"}   />
           ),
         }}
       />
