@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import TobBarOptions from "../../src/components/ui/TobBarOptions";
-import { BarChart } from "react-native-chart-kit";
+import { BarChart, LineChart } from "react-native-chart-kit";
 import { useState } from "react";
 
 const informes = () => {
@@ -68,36 +68,31 @@ const informes = () => {
           </View>
 
           <View onLayout={onLayout} className="w-full h-full p-4">
-            <BarChart
+            <LineChart
+              style={{
+                backgroundColor:"rgb(229, 231, 235)"
+              }}
               data={{
                 labels: data.map((item) => item.name),
                 datasets: [
                   {
                     data: data.map((item) => item.ingresos),
-                    color: (opacity = 1) => `rgba(48, 98, 123, ${opacity})`, // Color para ingresos
-                    barPercentage: 0.4, // Ajusta el ancho de la barra de ingresos
-                    categoryPercentage: 0.5,
+                    color: (opacity = 1) => "rgb(5, 117, 174)"
                   },
                   {
                     data: data.map((item) => item.gastos),
-                    color: (opacity = 1) => `rgba(144, 170, 116, ${opacity})`, // Color para gastos
-                    barPercentage: 0.4, // Ajusta el ancho de la barra de gastos
-                    categoryPercentage: 0.5,
+                    color: (opacity = 1) => "rgb(144, 170, 116)"
                   },
                 ],
               }}
-              width={width * 0.9}
-              height={height * 0.8} // Ajusta el alto según tu preferencia
-              yAxisSuffix="$"
-              fromZero
+              width={width * 0.9} // Ajustar según necesites
+              height={height * 0.8}
               chartConfig={{
+                backgroundColor: "white",
                 backgroundGradientFrom: "white",
                 backgroundGradientTo: "white",
-                decimalPlaces: 2,
-                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                style: {
-                  borderRadius: 16,
-                },
+                decimalPlaces: 2, // decimales
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // color de línea
               }}
             />
           </View>

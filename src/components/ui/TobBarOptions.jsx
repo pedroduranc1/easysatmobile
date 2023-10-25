@@ -5,6 +5,9 @@ import { router } from "expo-router";
 import { useQuery, useQueryClient } from "react-query";
 import { User } from "../../api/user/fb.user";
 import { useState } from "react";
+import { Image } from "expo-image";
+import menu from "../../../assets/MENU.svg";
+import menuSele from "../../../assets/MENU_SELECTED.svg";
 
 const UserCtrl = new User();
 const TobBarOptions = ({ route }) => {
@@ -39,7 +42,7 @@ const TobBarOptions = ({ route }) => {
           onPress={() => setToggleMenu(!ToggleMenu)}
           className="w-7 h-7 flex justify-center items-center "
         >
-          <Icon name="Menu" size={25} color={"text-LogoBlue"} />
+          <Image source={menu} className="w-5 h-7" />
         </TouchableOpacity>
       </View>
 
@@ -53,7 +56,7 @@ const TobBarOptions = ({ route }) => {
             onPress={() => setToggleMenu(!ToggleMenu)}
             className="w-7 h-7 flex justify-center items-center "
           >
-            <Icon name="Menu" size={25} color={"text-LogoBlue"} />
+            <Image source={menuSele} className="w-5 h-7" />
           </TouchableOpacity>
         </View>
         <View className="w-[80%]  gap-y-3 mx-auto mt-2 h-full">

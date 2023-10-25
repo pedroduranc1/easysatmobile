@@ -36,16 +36,20 @@ export default () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons focused={focused} icon={"HelpCircle"}  />
+            <TabButtons focused={focused} icon={"HelpCircle"} />
           ),
+          tabBarIconStyle: {
+            display: "none",
+          },
         }}
       />
+
       <Tabs.Screen
-        name="docs"
+        name="informes"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons focused={focused} icon={"HelpCircle"}  />
+            <TabButtons focused={focused} icon={"Ingresos"} />
           ),
         }}
       />
@@ -58,22 +62,27 @@ export default () => {
           ),
         }}
       />
-      <Tabs.Screen
-        name="informes"
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabButtons focused={focused} icon={"LineChart"}   />
-          ),
-        }}
-      />
+
       <Tabs.Screen
         name="documentos"
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabButtons focused={focused} icon={"FileText"}   />
+            <TabButtons focused={focused} icon={"Documentos"} />
           ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="docs"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabButtons focused={focused} icon={"HelpCircle"} />
+          ),
+          tabBarIconStyle: {
+            display: "none",
+          },
         }}
       />
     </Tabs>

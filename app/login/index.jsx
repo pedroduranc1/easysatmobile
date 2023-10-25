@@ -133,7 +133,7 @@ const index = () => {
 
             {!mutation.isLoading ? (
               <TouchableOpacity
-                onPress={handleSubmit}
+                onPress={router.replace("/main")}
                 className="w-[60%]  mt-[15%]  flex justify-center items-center  rounded-md py-4"
               >
                 <LinearGradient
