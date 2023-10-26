@@ -7,11 +7,7 @@ import Select from "../../src/components/ui/Select";
 import {
   calcularSumasAnuales,
   calcularSumasMensuales,
-  filtrarPorAño,
-  filtrarPorMes,
-  filtrarPorSemana,
   obtenerResumenAnual,
-  obtenerResumenMensual,
 } from "../../src/utils/funcs";
 //DATA
 import dataPrueba from "../../src/utils/dataPrueba";
