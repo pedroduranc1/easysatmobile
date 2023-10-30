@@ -7,6 +7,7 @@ import { Image } from "expo-image";
 export default () => {
   return (
     <Tabs
+      initialRouteName="home"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
