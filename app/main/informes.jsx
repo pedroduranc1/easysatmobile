@@ -7,6 +7,7 @@ import Select from "../../src/components/ui/Select";
 import {
   calcularSumasAnuales,
   calcularSumasMensuales,
+  obtenerMes,
   obtenerResumenAnual,
 } from "../../src/utils/funcs";
 //DATA
@@ -27,11 +28,25 @@ const informes = () => {
   };
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const [MesesUnicos, setMesesUnicos] = useState([]);
 
   const onLayout = (event) => {
     const { width, height } = event.nativeEvent.layout;
     setWidth(width);
     setHeight(height);
+  };
+
+  const FiltrarMeses = () => {
+    const mesesUnicos = [];
+    if (Data) {
+      Data.map((meses) => {
+        if (!mesesUnicos.includes(meses.mes)) {
+          mesesUnicos.push(meses.mes);
+        }
+      });
+    }
+
+    return mesesUnicos;
   };
 
   // Define los colores para ingresos y gastos
@@ -41,6 +56,7 @@ const informes = () => {
   const [selectedValue, setSelectedValue] = useState("weekly");
   const [Data, setData] = useState(null);
   const [FullData, setFullData] = useState(null);
+  const [GraphMeses, setGraphMeses] = useState([]);
 
   const filtrarPorParametro = (filter) => {
     if (filter === "weekly") {
@@ -63,6 +79,49 @@ const informes = () => {
     setFullData(fulData);
     setData(filteredData);
   }, [selectedValue]);
+
+  useEffect(() => {
+    if (Data) {
+      let mesesUnicos = [];
+      if (selectedValue === "weekly") {
+        Data.map((item) => {
+          if (!mesesUnicos.includes(item.mes)) {
+            mesesUnicos.push(item.mes);
+          }
+        });
+        setGraphMeses(mesesUnicos);
+      } else if (selectedValue === "monthly") {
+        Data.map((item) => {
+          if (!mesesUnicos.includes(item.mes)) {
+            mesesUnicos.push(item.mes);
+          }
+        });
+        setGraphMeses(mesesUnicos);
+      } else if (selectedValue === "yearly") {
+        Data.map((item) => {
+          if (!mesesUnicos.includes(item.year)) {
+            mesesUnicos.push(item.year);
+          }
+        });
+        setGraphMeses(mesesUnicos);
+      } else {
+        let AllMeses = [];
+        Data.map((data) => {
+          let mes = obtenerMes(data.fecha);
+          if (mes != undefined) {
+            AllMeses.push(mes);
+          }
+        });
+        AllMeses.map((mes) => {
+          if (!mesesUnicos.includes(mes)) {
+            mesesUnicos.push(mes);
+          }
+        });
+
+        setGraphMeses(mesesUnicos);
+      }
+    }
+  }, [Data]);
 
   return (
     <>
@@ -100,6 +159,7 @@ const informes = () => {
                   backgroundColor: "rgb(229, 231, 235)",
                 }}
                 data={{
+                  labels: GraphMeses && GraphMeses.map((item) => item),
                   datasets: [
                     {
                       data: Data.map((item) => item.ventas),
@@ -129,16 +189,24 @@ const informes = () => {
           {Data !== null && Data.length > 0 && (
             <View className="bg-gray-200 px-6 py-4 rounded-md">
               <Text className="text-[10px] font-bold">Ingresos</Text>
-              <Text className="text-LogoBlue text-[15px]">${FullData.ventas}</Text>
-              <Text className="text-gray-500 text-[9px]">{FullData.mes} {FullData.year}</Text>
+              <Text className="text-LogoBlue text-[15px]">
+                ${FullData.ventas}
+              </Text>
+              <Text className="text-gray-500 text-[9px]">
+                {FullData.mes} {FullData.year}
+              </Text>
             </View>
           )}
 
           {Data !== null && Data.length > 0 && (
             <View className="bg-gray-200 px-6 py-4 rounded-md">
               <Text className="text-[10px] font-bold">Gastos</Text>
-              <Text className="text-LogoGreen text-[15px]">${FullData.gastos}</Text>
-              <Text className="text-gray-500 text-[9px]">{FullData.mes} {FullData.year}</Text>
+              <Text className="text-LogoGreen text-[15px]">
+                ${FullData.gastos}
+              </Text>
+              <Text className="text-gray-500 text-[9px]">
+                {FullData.mes} {FullData.year}
+              </Text>
             </View>
           )}
         </View>

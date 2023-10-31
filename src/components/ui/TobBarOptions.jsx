@@ -24,9 +24,10 @@ const TobBarOptions = ({ route }) => {
   // }
 
   return (
-    <View 
-    style={{zIndex:5}}
-    className="w-full relative pt-[12%] px-[3%] flex flex-row h-[100px] justify-evenly items-start  rounded-b-2xl ">
+    <View
+      style={{ zIndex: 5 }}
+      className="w-full relative pt-[12%] px-[3%] flex flex-row h-[100px] justify-evenly items-start  rounded-b-2xl "
+    >
       <View className="w-[50%] px-4 bg-gray-300 gap-x-3 rounded-full items-center justify-start flex flex-row">
         <Icon color={"text-gray-500"} size={20} name={"Search"} />
         <TextInput className="w-fit bg-transparent" />
@@ -61,6 +62,7 @@ const TobBarOptions = ({ route }) => {
         </View>
         <View className="w-[80%]  gap-y-3 mx-auto mt-2 h-full">
           <TouchableOpacity
+            onPress={() => router.replace("/main")}
             className={`py-2 ${
               route == "home" && "bg-orange-400"
             } flex justify-center items-center rounded-full`}
@@ -74,6 +76,7 @@ const TobBarOptions = ({ route }) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => router.replace("/main/informes")}
             className={`py-2 ${
               route == "informes" && "bg-orange-400"
             } flex justify-center items-center rounded-full`}
@@ -83,10 +86,11 @@ const TobBarOptions = ({ route }) => {
                 route == "informes" ? "text-white" : "text-black"
               } font-bold`}
             >
-              Informes
+              Ingreso y Gastos
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => router.replace("/main/documentos")}
             className={`py-2 ${
               route == "documentos" && "bg-orange-400"
             } flex justify-center items-center rounded-full`}
@@ -100,6 +104,7 @@ const TobBarOptions = ({ route }) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => router.replace("/perfil")}
             className={`py-2 ${
               route == "configuracion" && "bg-orange-400"
             } flex justify-center items-center rounded-full`}
@@ -109,11 +114,11 @@ const TobBarOptions = ({ route }) => {
                 route == "configuracion" ? "text-white" : "text-black"
               } font-bold`}
             >
-              Configuracion
+              Perfil
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={()=>router.replace("/")}
+            onPress={() => router.replace("/")}
             className={`py-2 ${
               route == "configuracion" && "bg-orange-400"
             } flex justify-center items-center rounded-full`}

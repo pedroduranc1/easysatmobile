@@ -124,3 +124,10 @@ export function calcularSumasAnuales(data) {
   return resultado;
 }
 
+export function obtenerMes(fecha) {
+  const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  const fechaObjeto = new Date(fecha);
+  const mes = fechaObjeto.getMonth();
+  return meses[mes];
+}
+
